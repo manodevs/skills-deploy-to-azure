@@ -5,11 +5,14 @@ on:
        opened
 jobs:
    comment:
+      permissions:
+        id-token: write
       runs-on: ubuntu-latest
       steps:
          - name: Add Comment to new opened issues
            uses: actions/github-script@v9.0.0
            with:
+              github-token: ${{ github.token }}
               script: |
                 github.issues.createComment({
                  issue_number: context.issue.number,
