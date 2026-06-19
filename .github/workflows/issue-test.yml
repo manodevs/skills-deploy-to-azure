@@ -5,8 +5,6 @@ on:
        opened
 jobs:
    comment:
-      permissions:
-        id-token: write
       runs-on: ubuntu-latest
       steps:
          - name: Add Comment to new opened issues
@@ -14,7 +12,7 @@ jobs:
            with:
               github-token: ${{ secrets.GITHUB_TOKEN }}
               script: |
-                await octakit.rest.issues.createComment({
+                await github.rest.issues.createComment({
                  issue_number: context.issue.number,
                  owner: context.repo.owner,
                  repo: context.repo.repo,
